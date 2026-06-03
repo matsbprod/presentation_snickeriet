@@ -424,6 +424,41 @@
 
     .lb-close:hover { color: var(--gold-light); }
 
+    .lb-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(13,43,78,0.7);
+      border: 1px solid rgba(196,160,82,0.4);
+      color: var(--white);
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.4rem;
+      transition: background 0.2s, border-color 0.2s;
+      user-select: none;
+      z-index: 10;
+    }
+
+    .lb-arrow:hover { background: rgba(13,43,78,0.95); border-color: var(--gold-light); color: var(--gold-light); }
+    .lb-prev { left: 24px; }
+    .lb-next { right: 24px; }
+
+    .lb-counter {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      color: rgba(255,255,255,0.5);
+    }
+
     /* ══ RESPONSIVE ═══════════════════════════════════════ */
     @media (max-width: 768px) {
       nav ul, .vessel-header, .grid-section, .drawings-section, footer { padding-left: 22px; padding-right: 22px; }
@@ -646,22 +681,48 @@
 <!-- ══ LIGHTBOX ═══════════════════════════════════════════ -->
 <div class="lightbox" id="lightbox" onclick="closeLb()">
   <span class="lb-close" onclick="closeLb()">Close &times;</span>
+  <div class="lb-arrow lb-prev" onclick="event.stopPropagation(); lbStep(-1)">&#8592;</div>
   <img id="lb-img" src="" alt="" onclick="event.stopPropagation()">
+  <div class="lb-arrow lb-next" onclick="event.stopPropagation(); lbStep(1)">&#8594;</div>
+  <div class="lb-counter" id="lb-counter"></div>
 </div>
 
 <script>
+  let lbImages = [];
+  let lbIndex = 0;
+
   function lb(el) {
-    const img = el.querySelector('img');
-    document.getElementById('lb-img').src = img.src;
-    document.getElementById('lb-img').alt = img.alt;
+    // Collect all clickable images from the same section
+    const section = el.closest('#svanevit, #hei');
+    const items = section ? Array.from(section.querySelectorAll('.cad-item, .drawing-item')) : [el];
+    lbImages = items.map(i => ({ src: i.querySelector('img').src, alt: i.querySelector('img').alt }));
+    lbIndex = items.indexOf(el);
+    showLb();
     document.getElementById('lightbox').classList.add('active');
     document.body.style.overflow = 'hidden';
   }
+
+  function showLb() {
+    document.getElementById('lb-img').src = lbImages[lbIndex].src;
+    document.getElementById('lb-img').alt = lbImages[lbIndex].alt;
+    document.getElementById('lb-counter').textContent = (lbIndex + 1) + ' / ' + lbImages.length;
+  }
+
+  function lbStep(dir) {
+    lbIndex = (lbIndex + dir + lbImages.length) % lbImages.length;
+    showLb();
+  }
+
   function closeLb() {
     document.getElementById('lightbox').classList.remove('active');
     document.body.style.overflow = '';
   }
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLb();
+    if (e.key === 'ArrowRight') lbStep(1);
+    if (e.key === 'ArrowLeft') lbStep(-1);
+  });
 </script>
 </body>
 </html>
