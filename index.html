@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Princess Svanevit & Hei III — Stockholms Båtsnickeri</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #0d2b4e;
+      --navy-mid:   #1a3d66;
+      --navy-light: #243f60;
+      --paper:      #e8f0f8;
+      --paper-dark: #d4e2f0;
+      --ink:        #111820;
+      --gold:       #8b6914;
+      --gold-light: #c4a052;
+      --rule:       rgba(255,255,255,0.15);
+      --rule-dark:  #9ab0c8;
+      --white:      #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    /* ══ HEADER / BRAND BAR ═══════════════════════════════ */
+    .brand-bar {
+      background: var(--navy);
+      padding: 36px 60px 32px;
+      border-bottom: 1px solid var(--rule);
+      position: relative;
+    }
+
+    .brand-bar::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+    }
+
+    .brand-bar .inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .brand-logo {
+      height: 64px;
+      width: auto;
+      filter: invert(1) brightness(2);
+      flex-shrink: 0;
+    }
+
+    .brand-divider {
+      width: 1px;
+      height: 48px;
+      background: var(--rule);
+      flex-shrink: 0;
+    }
+
+    .brand-text {}
+
+    .brand-name {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 1.3rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--white);
+      line-height: 1.1;
+    }
+
+    .brand-tagline {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 200;
+      font-size: 0.65rem;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-top: 5px;
+    }
+
+    /* ══ NAV ══════════════════════════════════════════════ */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--navy-mid);
+      border-bottom: 2px solid var(--gold);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 60px;
+    }
+
+    nav a {
+      display: block;
+      padding: 16px 0;
+      margin-right: 36px;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    nav a:hover { color: var(--gold-light); border-color: var(--gold-light); }
+
+    /* ══ VESSEL SECTION HEADER ════════════════════════════ */
+    .vessel-header {
+      background: var(--navy-light);
+      padding: 64px 60px 52px;
+      border-bottom: 1px solid var(--rule);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .vessel-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg,  rgba(255,255,255,0.02) 0, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 52px),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 52px);
+      pointer-events: none;
+    }
+
+    .vessel-header .inner {
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 40px;
+    }
+
+    .vessel-eyebrow {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.68rem;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 16px;
+    }
+
+    .vessel-title {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 200;
+      font-size: clamp(2.4rem, 4.5vw, 4.2rem);
+      line-height: 1.0;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+
+    .vessel-title strong {
+      display: block;
+      font-weight: 500;
+      color: var(--gold-light);
+      letter-spacing: 0.16em;
+    }
+
+    .vessel-rule {
+      width: 52px;
+      height: 1px;
+      background: var(--gold);
+      margin: 22px 0;
+    }
+
+    .vessel-desc {
+      font-size: 1.1rem;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.7);
+      max-width: 540px;
+    }
+
+    .vessel-specs {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .spec-pill {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 0.65rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 7px 16px;
+      white-space: nowrap;
+    }
+
+    /* ══ GRID SECTION ═════════════════════════════════════ */
+    .grid-section {
+      background: var(--navy);
+      padding: 56px 60px 72px;
+    }
+
+    .grid-section .inner { max-width: 1200px; margin: 0 auto; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 40px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .section-num {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 1.35rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* ══ CAD GRID ═════════════════════════════════════════ */
+    .cad-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+    }
+
+    .cad-grid .wide { grid-column: span 2; }
+
+    .cad-item {
+      position: relative;
+      overflow: hidden;
+      background: #131c28;
+      cursor: zoom-in;
+    }
+
+    .cad-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      aspect-ratio: 4/3;
+      transition: transform 0.45s ease, filter 0.3s;
+      filter: brightness(0.88) contrast(1.06);
+    }
+
+    .wide img { aspect-ratio: 16/7; }
+
+    .cad-item:hover img {
+      transform: scale(1.04);
+      filter: brightness(1) contrast(1.06);
+    }
+
+    .cad-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 32px 16px 12px;
+      background: linear-gradient(transparent, rgba(8,16,28,0.85));
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.9);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .cad-item:hover .cad-label { opacity: 1; }
+
+    /* ══ DRAWINGS GRID ════════════════════════════════════ */
+    .drawings-section {
+      background: var(--navy-mid);
+      padding: 56px 60px 72px;
+      border-top: 1px solid var(--rule);
+    }
+
+    .drawings-section .inner { max-width: 1200px; margin: 0 auto; }
+
+    .drawings-meta {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 48px;
+      align-items: start;
+      margin-bottom: 44px;
+    }
+
+    .drawings-meta p {
+      font-size: 1.15rem;
+      font-style: italic;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.68);
+    }
+
+    .provenance {
+      border-left: 3px solid var(--gold);
+      padding: 24px 24px 24px 22px;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .provenance h3 {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .provenance dl {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 9px 16px;
+    }
+
+    .provenance dt {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 0.63rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+    }
+
+    .provenance dd {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .drawings-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+    }
+
+    .drawing-item {
+      position: relative;
+      overflow: hidden;
+      background: #131c28;
+      cursor: zoom-in;
+    }
+
+    .drawing-item.full { grid-column: 1 / -1; }
+
+    .drawing-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.45s ease;
+      filter: brightness(0.95);
+    }
+
+    .drawing-item.full img {
+      max-height: 480px;
+      object-fit: contain;
+      background: #f0ece0;
+    }
+
+    .drawing-item:not(.full) img {
+      aspect-ratio: 16/9;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .drawing-item:hover img { transform: scale(1.02); filter: brightness(1); }
+
+    .drawing-tag {
+      position: absolute;
+      bottom: 10px; left: 12px;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      background: rgba(13,43,78,0.88);
+      padding: 5px 10px;
+      border: 1px solid rgba(196,160,82,0.3);
+    }
+
+    /* ══ SECTION SEPARATOR ════════════════════════════════ */
+    .section-sep {
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+    }
+
+    /* ══ FOOTER ═══════════════════════════════════════════ */
+    footer {
+      background: #08111c;
+      padding: 28px 60px;
+      border-top: 1px solid var(--rule);
+    }
+
+    footer .inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    footer p {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.63rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+
+    footer p strong { color: var(--gold-light); font-weight: 400; }
+
+    /* ══ LIGHTBOX ═════════════════════════════════════════ */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(5,10,18,0.96);
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+
+    .lightbox.active { display: flex; }
+
+    .lightbox img {
+      max-width: 94vw;
+      max-height: 92vh;
+      object-fit: contain;
+      cursor: default;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+    }
+
+    .lb-close {
+      position: absolute;
+      top: 24px; right: 32px;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .lb-close:hover { color: var(--gold-light); }
+
+    /* ══ RESPONSIVE ═══════════════════════════════════════ */
+    @media (max-width: 768px) {
+      .brand-bar, nav ul, .vessel-header, .grid-section, .drawings-section, footer
+        { padding-left: 22px; padding-right: 22px; }
+      nav ul { padding-left: 22px; padding-right: 22px; }
+      .vessel-header .inner { grid-template-columns: 1fr; }
+      .vessel-specs { display: none; }
+      .cad-grid, .drawings-grid { grid-template-columns: 1fr; }
+      .cad-grid .wide { grid-column: span 1; }
+      .drawing-item.full { grid-column: auto; }
+      .drawings-meta { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ BRAND BAR ══════════════════════════════════════════ -->
+<header class="brand-bar">
+  <div class="inner">
+    <img class="brand-logo" src="images/logo_batsnickeri.png" alt="Stockholms Båtsnickeri">
+    <div class="brand-divider"></div>
+    <div class="brand-text">
+      <div class="brand-name">Stockholms Båtsnickeri</div>
+      <div class="brand-tagline">Classic Wooden Boat Restoration · Stockholm</div>
+    </div>
+  </div>
+</header>
+
+<!-- ══ NAV ════════════════════════════════════════════════ -->
+<nav>
+  <ul>
+    <li><a href="#svanevit">Princess Svanevit</a></li>
+    <li><a href="#hei">Hei III — 95:an</a></li>
+  </ul>
+</nav>
+
+
+<!-- ════════════════════════════════════════════════════════
+     VESSEL 1 — PRINCESS SVANEVIT (R12)
+═════════════════════════════════════════════════════════ -->
+<div id="svanevit">
+
+  <div class="vessel-header">
+    <div class="inner">
+      <div>
+        <p class="vessel-eyebrow">Restoration Project · R12 · Built 1930</p>
+        <h1 class="vessel-title">Princess<br><strong>Svanevit</strong></h1>
+        <div class="vessel-rule"></div>
+        <p class="vessel-desc">
+          An R12 racing yacht designed by Gustaf Estlander, built in 1930.
+          Three-dimensional reconstruction from original drawings and on-site
+          documentation, forming the basis for full restoration.
+        </p>
+      </div>
+      <div class="vessel-specs">
+        <span class="spec-pill">R12 · Racing Yacht</span>
+        <span class="spec-pill">Designer: Gustaf Estlander</span>
+        <span class="spec-pill">Built: 1930</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-section">
+    <div class="inner">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2 class="section-title">CAD Models &amp; 3D Reconstruction</h2>
+      </div>
+
+      <div class="cad-grid">
+
+        <div class="cad-item wide" onclick="lb(this)">
+          <img src="images/composite_sections.png" alt="Hull sections and frames" loading="lazy">
+          <div class="cad-label">Hull · sections &amp; frames</div>
+        </div>
+
+        <div class="cad-item" onclick="lb(this)">
+          <img src="images/cad_hulls_3view.png" alt="Hull — three iterations" loading="lazy">
+          <div class="cad-label">Hull · three iterations</div>
+        </div>
+
+        <div class="cad-item" onclick="lb(this)">
+          <img src="images/composite_lines.png" alt="Frame drawing 3D overlay" loading="lazy">
+          <div class="cad-label">Frame drawing · 3D overlay</div>
+        </div>
+
+        <div class="cad-item" onclick="lb(this)">
+          <img src="images/cad_hull_section.png" alt="Hull CAD" loading="lazy">
+          <div class="cad-label">Hull · CAD</div>
+        </div>
+
+        <div class="cad-item" onclick="lb(this)">
+          <img src="images/cad_planks.png" alt="Planking — top and port side" loading="lazy">
+          <div class="cad-label">Planking · top &amp; port side</div>
+        </div>
+
+        <div class="cad-item" onclick="lb(this)">
+          <img src="images/cad_toolpath.png" alt="CNC toolpath" loading="lazy">
+          <div class="cad-label">CNC · toolpath</div>
+        </div>
+
+        <div class="cad-item" onclick="lb(this)">
+          <img src="images/cad_mastfoot.png" alt="Mast foot detail" loading="lazy">
+          <div class="cad-label">Mast foot · detail</div>
+        </div>
+
+        <div class="cad-item" onclick="lb(this)">
+          <img src="images/cad_keel_top.png" alt="Keel — top view" loading="lazy">
+          <div class="cad-label">Keel · top view</div>
+        </div>
+
+        <div class="cad-item" onclick="lb(this)">
+          <img src="images/cad_keel_side.png" alt="Keel — side view" loading="lazy">
+          <div class="cad-label">Keel · side view</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div><!-- /svanevit -->
+
+
+<div class="section-sep"></div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     VESSEL 2 — HEI III · SKERRY CRUISER 95 KVM
+═════════════════════════════════════════════════════════ -->
+<div id="hei">
+
+  <div class="vessel-header">
+    <div class="inner">
+      <div>
+        <p class="vessel-eyebrow">Documentation &amp; CAD Reconstruction · Skerry Cruiser · 1920</p>
+        <h1 class="vessel-title">Hei III<br><strong>95:an</strong></h1>
+        <div class="vessel-rule"></div>
+        <p class="vessel-desc">
+          A 95 sqm Skerry Cruiser designed by Erik Salander, Stockholm, January 1920.
+          Original drawings digitised and used as the foundation for a complete
+          three-dimensional reconstruction.
+        </p>
+      </div>
+      <div class="vessel-specs">
+        <span class="spec-pill">Skerry Cruiser · 95 sqm</span>
+        <span class="spec-pill">Designer: Erik Salander</span>
+        <span class="spec-pill">Drawn: 1920</span>
+        <span class="spec-pill">Scale: 1:50</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="drawings-section">
+    <div class="inner">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2 class="section-title">Original Drawings · Erik Salander 1920</h2>
+      </div>
+
+      <div class="drawings-meta">
+        <p>
+          The original drawings for the 95 sqm Skerry Cruiser were produced by designer
+          Erik Salander in Stockholm in January 1920, at a scale of 1:50.
+          Three sheets survive — rig, accommodation plan, and structural construction —
+          and form the complete basis for the CAD reconstruction work.
+        </p>
+        <div class="provenance">
+          <h3>Provenance</h3>
+          <dl>
+            <dt>Vessel</dt><dd>Hei III (95:an)</dd>
+            <dt>Designer</dt><dd>Erik Salander</dd>
+            <dt>Year</dt><dd>1920</dd>
+            <dt>City</dt><dd>Stockholm</dd>
+            <dt>Class</dt><dd>Skerry Cruiser</dd>
+            <dt>Sail area</dt><dd>95 sqm</dd>
+            <dt>Scale</dt><dd>1:50</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="drawings-grid">
+        <div class="drawing-item full" onclick="lb(this)">
+          <img src="images/drawing_rig.jpg" alt="Rig drawing 1920" loading="lazy">
+          <div class="drawing-tag">Rig · 1920</div>
+        </div>
+        <div class="drawing-item" onclick="lb(this)">
+          <img src="images/drawing_interior.jpg" alt="Accommodation and plan" loading="lazy">
+          <div class="drawing-tag">Accommodation &amp; plan</div>
+        </div>
+        <div class="drawing-item" onclick="lb(this)">
+          <img src="images/drawing_construction.jpg" alt="Structural construction drawing" loading="lazy">
+          <div class="drawing-tag">Construction</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /hei -->
+
+
+<!-- ══ FOOTER ════════════════════════════════════════════ -->
+<footer>
+  <div class="inner">
+    <p>Stockholms Båtsnickeri · <strong>Classic Wooden Boat Restoration</strong></p>
+    <p>Princess Svanevit · Estlander 1930 &nbsp;|&nbsp; Hei III · Salander <strong>1920</strong></p>
+  </div>
+</footer>
+
+<!-- ══ LIGHTBOX ═══════════════════════════════════════════ -->
+<div class="lightbox" id="lightbox" onclick="closeLb()">
+  <span class="lb-close" onclick="closeLb()">Close &times;</span>
+  <img id="lb-img" src="" alt="" onclick="event.stopPropagation()">
+</div>
+
+<script>
+  function lb(el) {
+    const img = el.querySelector('img');
+    document.getElementById('lb-img').src = img.src;
+    document.getElementById('lb-img').alt = img.alt;
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLb() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+</script>
+</body>
+</html>
